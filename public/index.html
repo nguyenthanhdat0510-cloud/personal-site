@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trang cá nhân</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div id="app" class="container">
+    <p class="loading">Đang tải thông tin...</p>
+  </div>
+
+  <template id="tpl-content">
+    <header class="hero">
+      <div class="avatar" id="avatar"></div>
+      <h1 id="name"></h1>
+      <p class="title" id="title"></p>
+      <p class="bio" id="bio"></p>
+
+      <div class="socials" id="socials"></div>
+
+      <div class="contact" id="contact"></div>
+    </header>
+
+    <section class="schedule-section">
+      <h2>Lịch học</h2>
+      <div class="table-wrapper">
+        <table id="schedule-table">
+          <thead>
+            <tr>
+              <th>Thứ</th>
+              <th>Thời gian</th>
+              <th>Môn học</th>
+              <th>Phòng</th>
+            </tr>
+          </thead>
+          <tbody id="schedule-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <a href="/admin.html">Quản trị</a>
+    </footer>
+  </template>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>

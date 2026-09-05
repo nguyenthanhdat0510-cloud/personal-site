@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quản trị trang cá nhân</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div class="container">
+    <a href="/index.html" class="back-link">&larr; Về trang chủ</a>
+
+    <div id="login-box">
+      <h1>Đăng nhập quản trị</h1>
+      <input type="password" id="token-input" placeholder="Nhập admin token" />
+      <button id="login-btn">Đăng nhập</button>
+      <p id="login-error" class="error"></p>
+    </div>
+
+    <div id="admin-box" class="hidden">
+      <h1>Chỉnh sửa thông tin</h1>
+
+      <form id="profile-form">
+        <label>Họ tên
+          <input type="text" name="name" required />
+        </label>
+        <label>Chức danh / mô tả ngắn
+          <input type="text" name="title" />
+        </label>
+        <label>Giới thiệu
+          <textarea name="bio" rows="4"></textarea>
+        </label>
+        <label>Số điện thoại
+          <input type="text" name="phone" />
+        </label>
+        <label>Email
+          <input type="email" name="email" />
+        </label>
+        <label>Facebook
+          <input type="url" name="facebook" />
+        </label>
+        <label>TikTok
+          <input type="url" name="tiktok" />
+        </label>
+        <label>Instagram
+          <input type="url" name="instagram" />
+        </label>
+        <button type="submit">Lưu thông tin</button>
+        <p id="save-msg"></p>
+      </form>
+
+      <h2>Lịch học</h2>
+      <table id="admin-schedule-table">
+        <thead>
+          <tr><th>Thứ</th><th>Bắt đầu</th><th>Kết thúc</th><th>Môn học</th><th>Phòng</th><th></th></tr>
+        </thead>
+        <tbody id="admin-schedule-body"></tbody>
+      </table>
+
+      <h3>Thêm buổi học mới</h3>
+      <form id="add-schedule-form" class="inline-form">
+        <input type="text" name="day" placeholder="Thứ (vd: Thứ 2)" required />
+        <input type="time" name="start" required />
+        <input type="time" name="end" required />
+        <input type="text" name="subject" placeholder="Môn học" required />
+        <input type="text" name="room" placeholder="Phòng" />
+        <button type="submit">Thêm</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/admin.js"></script>
+</body>
+</html>
