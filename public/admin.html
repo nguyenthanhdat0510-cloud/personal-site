@@ -12,8 +12,13 @@
 
     <div id="login-box">
       <h1>Đăng nhập quản trị</h1>
-      <input type="password" id="token-input" placeholder="Nhập admin token" />
-      <button id="login-btn">Đăng nhập</button>
+      <p>Nhập mật khẩu quản trị để mở phần chỉnh sửa.</p>
+      <form id="login-form">
+        <label>Mật khẩu quản trị
+          <input type="password" id="token-input" placeholder="Nhập mật khẩu" autocomplete="current-password" required />
+        </label>
+        <button id="login-btn" type="submit">Đăng nhập</button>
+      </form>
       <p id="login-error" class="error"></p>
     </div>
 
@@ -30,6 +35,13 @@
         <label>Giới thiệu
           <textarea name="bio" rows="4"></textarea>
         </label>
+        <label>Ảnh đại diện
+          <input type="url" name="avatarUrl" placeholder="Dán liên kết ảnh (https://...)" />
+        </label>
+        <label>Hoặc chọn ảnh từ máy
+          <input type="file" id="avatar-file" accept="image/png,image/jpeg,image/webp" />
+        </label>
+        <img id="avatar-preview" class="avatar-preview" alt="Xem trước ảnh đại diện" hidden />
         <label>Số điện thoại
           <input type="text" name="phone" />
         </label>
@@ -59,13 +71,19 @@
 
       <h3>Thêm buổi học mới</h3>
       <form id="add-schedule-form" class="inline-form">
-        <input type="text" name="day" placeholder="Thứ (vd: Thứ 2)" required />
+        <select name="day" required>
+          <option value="">Chọn thứ</option><option>Thứ 2</option><option>Thứ 3</option><option>Thứ 4</option><option>Thứ 5</option><option>Thứ 6</option><option>Thứ 7</option><option>Chủ nhật</option>
+        </select>
         <input type="time" name="start" required />
         <input type="time" name="end" required />
         <input type="text" name="subject" placeholder="Môn học" required />
         <input type="text" name="room" placeholder="Phòng" />
         <button type="submit">Thêm</button>
       </form>
+
+      <h2>Lời nhắn chờ duyệt</h2>
+      <p id="pending-comments-empty">Đang tải…</p>
+      <div id="pending-comments" class="pending-comments"></div>
     </div>
   </div>
 

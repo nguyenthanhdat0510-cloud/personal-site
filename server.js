@@ -9,7 +9,9 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(cors());
-app.use(express.json());
+// Ảnh đại diện được gửi từ trang quản trị dưới dạng data URL.
+// 4 MB đủ cho ảnh đã giới hạn ở client, đồng thời vẫn tránh nhận payload quá lớn.
+app.use(express.json({ limit: '4mb' }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api', apiRoutes);

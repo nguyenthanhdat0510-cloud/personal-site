@@ -1,50 +1,274 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Trang cá nhân</title>
-  <link rel="stylesheet" href="/css/style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Trang cá nhân và lịch học của Nguyễn Minh An.">
+  <title>Nguyễn Minh An — Hồ sơ cá nhân</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont/tabler-icons.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script defer src="/js/main.js"></script>
 </head>
 <body>
-  <div id="app" class="container">
-    <p class="loading">Đang tải thông tin...</p>
-  </div>
+  <main class="campus-page" id="campusPage">
+    <header class="site-header">
+      <div class="page-gutter header-inner">
+        <a class="brand-mark" href="#home" aria-label="Về đầu trang">
+          <span class="brand-initials">MA</span>
+          <span class="brand-name">Minh An</span>
+        </a>
 
-  <template id="tpl-content">
-    <header class="hero">
-      <div class="avatar" id="avatar"></div>
-      <h1 id="name"></h1>
-      <p class="title" id="title"></p>
-      <p class="bio" id="bio"></p>
+        <nav class="desktop-nav" aria-label="Điều hướng chính">
+          <a class="header-link" href="#about">Giới thiệu</a>
+          <a class="header-link" href="#connect">Kết nối</a>
+          <a class="header-link" href="#schedule">Lịch học</a>
+          <button class="icon-control theme-control" id="themeToggleDesktop" type="button" aria-label="Đổi giao diện sáng tối" aria-pressed="false" title="Đổi giao diện sáng tối">
+            <i class="ti ti-sun theme-icon" aria-hidden="true"></i>
+          </button>
+        </nav>
 
-      <div class="socials" id="socials"></div>
+        <div class="mobile-header-actions">
+          <a class="mobile-schedule-link" href="#schedule">Lịch học</a>
+          <button class="icon-control theme-control" id="themeToggleMobile" type="button" aria-label="Đổi giao diện sáng tối" aria-pressed="false" title="Đổi giao diện sáng tối">
+            <i class="ti ti-sun theme-icon" aria-hidden="true"></i>
+          </button>
+          <button class="icon-control menu-control" id="menuToggle" type="button" aria-label="Mở menu" aria-expanded="false" title="Mở menu">
+            <i class="ti ti-menu-2 menu-icon" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
 
-      <div class="contact" id="contact"></div>
+      <nav class="mobile-menu page-gutter" id="mobileMenu" aria-label="Điều hướng trên điện thoại" hidden>
+        <a href="#about">Giới thiệu</a>
+        <a href="#connect">Kết nối</a>
+        <a href="#schedule">Lịch học</a>
+      </nav>
     </header>
 
-    <section class="schedule-section">
-      <h2>Lịch học</h2>
-      <div class="table-wrapper">
-        <table id="schedule-table">
-          <thead>
-            <tr>
-              <th>Thứ</th>
-              <th>Thời gian</th>
-              <th>Môn học</th>
-              <th>Phòng</th>
-            </tr>
-          </thead>
-          <tbody id="schedule-body"></tbody>
-        </table>
+    <section class="hero-section section-anchor" id="home">
+      <div class="page-gutter hero-grid">
+        <div class="hero-portrait">
+          <div class="avatar-frame">
+            <div class="avatar-fallback" id="avatarFallback" aria-hidden="true" hidden>MA</div>
+            <img id="avatarImage" src="https://i.pravatar.cc/900?img=47" alt="Ảnh đại diện Nguyễn Minh An" loading="lazy" decoding="async">
+            <span class="tech-corner tech-corner-tl" aria-hidden="true"></span>
+            <span class="tech-corner tech-corner-tr" aria-hidden="true"></span>
+            <span class="tech-corner tech-corner-bl" aria-hidden="true"></span>
+            <span class="tech-corner tech-corner-br" aria-hidden="true"></span>
+            <div class="avatar-meta" aria-hidden="true">
+              <span>PORTRAIT / 01</span>
+              <span>4:5</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-copy">
+          <p class="eyebrow hero-eyebrow">SINH VIÊN · HỆ THỐNG THÔNG TIN</p>
+          <h1 class="hero-title">Nguyễn Minh An</h1>
+          <p class="hero-role">Sinh viên năm ba · Người làm sản phẩm số</p>
+          <p class="hero-description">Mình biến những bài toán phức tạp trong lớp thành sản phẩm số dễ dùng, có cấu trúc và luôn hướng về người dùng.</p>
+          <div class="hero-actions">
+            <a class="primary-action" href="mailto:minhan@example.com">Liên hệ <i class="ti ti-arrow-up-right" aria-hidden="true"></i></a>
+            <a class="text-action" href="#schedule">Xem lịch học <i class="ti ti-arrow-down-right" aria-hidden="true"></i></a>
+          </div>
+
+          <a class="next-ticket" href="#schedule" aria-label="Xem môn học kế tiếp">
+            <span class="ticket-notch" aria-hidden="true"></span>
+            <span class="ticket-code">
+              <strong>CS204</strong>
+              <small>NEXT</small>
+            </span>
+            <span class="ticket-detail">
+              <strong>Lập trình Web</strong>
+              <span>Thứ hai · 09:00–11:00 · Phòng A3.204</span>
+            </span>
+            <i class="ti ti-arrow-up-right ticket-arrow" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-section section-space section-anchor" id="about">
+      <div class="page-gutter about-grid">
+        <div class="about-lead">
+          <p class="eyebrow">01 — VỀ TÔI</p>
+          <h2 class="section-title">Học bằng cách làm, trưởng thành bằng cách chia sẻ.</h2>
+          <p class="body-copy">Mình là sinh viên năm ba yêu thích việc nối những dòng dữ liệu, những câu trò chuyện và những chi tiết nhỏ thành trải nghiệm rõ ràng hơn cho mọi người.</p>
+        </div>
+
+        <div class="info-list" aria-label="Thông tin về Minh An">
+          <div class="info-row">
+            <i class="ti ti-code-2 info-icon" aria-hidden="true"></i>
+            <div>
+              <h3>Kỹ năng</h3>
+              <p>Figma <span>·</span> HTML / CSS <span>·</span> Nghiên cứu người dùng <span>·</span> Viết nội dung</p>
+            </div>
+          </div>
+          <div class="info-row">
+            <i class="ti ti-headphones info-icon" aria-hidden="true"></i>
+            <div>
+              <h3>Sở thích</h3>
+              <p>Nghe nhạc indie <span>·</span> Chụp ảnh film <span>·</span> Đi bộ quanh thành phố</p>
+            </div>
+          </div>
+          <div class="info-row">
+            <i class="ti ti-target info-icon info-icon-coral" aria-hidden="true"></i>
+            <div>
+              <h3>Mục tiêu</h3>
+              <p>Xây một sản phẩm tốt đủ để người khác muốn dùng mỗi ngày.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="social-section section-space section-anchor" id="connect">
+      <div class="page-gutter">
+        <div class="section-heading-row">
+          <div>
+            <p class="eyebrow">02 — KẾT NỐI</p>
+            <h2 class="section-title section-title-small">Kết nối với tôi</h2>
+          </div>
+          <p class="section-note">Chọn một điểm dừng để bắt đầu.</p>
+        </div>
+
+        <div class="social-grid">
+          <a class="social-link" href="https://facebook.com/minhan" target="_blank" rel="noreferrer">
+            <span class="social-copy"><i class="ti ti-brand-facebook social-icon" aria-hidden="true"></i><span><strong>Facebook</strong><small>/minhan</small></span></span>
+            <i class="ti ti-arrow-up-right social-arrow" aria-hidden="true"></i>
+          </a>
+          <a class="social-link" href="https://instagram.com/minhan.jpg" target="_blank" rel="noreferrer">
+            <span class="social-copy"><i class="ti ti-brand-instagram social-icon social-icon-coral" aria-hidden="true"></i><span><strong>Instagram</strong><small>@minhan.jpg</small></span></span>
+            <i class="ti ti-arrow-up-right social-arrow" aria-hidden="true"></i>
+          </a>
+          <a class="social-link" href="https://github.com/nguyenminhan" target="_blank" rel="noreferrer">
+            <span class="social-copy"><i class="ti ti-brand-github social-icon social-icon-ink" aria-hidden="true"></i><span><strong>GitHub</strong><small>/nguyenminhan</small></span></span>
+            <i class="ti ti-arrow-up-right social-arrow" aria-hidden="true"></i>
+          </a>
+          <a class="social-link" href="https://linkedin.com/in/nguyenminhan" target="_blank" rel="noreferrer">
+            <span class="social-copy"><i class="ti ti-brand-linkedin social-icon" aria-hidden="true"></i><span><strong>LinkedIn</strong><small>/in/nguyenminhan</small></span></span>
+            <i class="ti ti-arrow-up-right social-arrow" aria-hidden="true"></i>
+          </a>
+          <a class="social-link" href="https://tiktok.com/@minhan" target="_blank" rel="noreferrer">
+            <span class="social-copy"><i class="ti ti-brand-tiktok social-icon social-icon-ink" aria-hidden="true"></i><span><strong>TikTok</strong><small>@minhan</small></span></span>
+            <i class="ti ti-arrow-up-right social-arrow" aria-hidden="true"></i>
+          </a>
+          <a class="social-link email-link" href="mailto:minhan@example.com">
+            <span class="social-copy"><i class="ti ti-mail social-icon social-icon-coral" aria-hidden="true"></i><span><strong>Email</strong><small>minhan@example.com</small></span></span>
+            <i class="ti ti-arrow-up-right social-arrow" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="schedule-section section-space section-anchor" id="schedule">
+      <div class="page-gutter">
+        <div class="schedule-top-divider" aria-hidden="true"></div>
+        <div class="schedule-heading">
+          <div class="schedule-title-block">
+            <p class="eyebrow">03 — TUẦN ĐANG XEM</p>
+            <h2 class="section-title">Lịch học</h2>
+            <p class="week-range" id="calendarRange">Đang tải tuần…</p>
+          </div>
+          <div class="schedule-meta">
+            <p class="clock-date" id="calendarCurrentDate">Đang cập nhật ngày…</p>
+            <p class="live-clock" id="liveClock" aria-label="Thời gian hiện tại">--:-- <span>ICT</span></p>
+            <p class="clock-error" id="clockError" hidden>Không thể cập nhật thời gian</p>
+          </div>
+          <div class="week-controls" aria-label="Điều hướng lịch học">
+            <button class="calendar-control" type="button" data-week-action="prev" aria-label="Tuần trước" title="Tuần trước"><i class="ti ti-chevron-left" aria-hidden="true"></i></button>
+            <button class="calendar-control calendar-today-control" type="button" data-week-action="today">Hôm nay</button>
+            <button class="calendar-control" type="button" data-week-action="next" aria-label="Tuần sau" title="Tuần sau"><i class="ti ti-chevron-right" aria-hidden="true"></i></button>
+          </div>
+        </div>
+
+        <div class="calendar-scroll" aria-label="Lịch học theo tuần">
+          <div class="desktop-calendar" role="grid">
+            <div class="calendar-header-grid" role="row">
+              <div class="calendar-head-spacer" aria-hidden="true"></div>
+              <div class="calendar-day-head" data-day-head="0" role="columnheader"><span class="calendar-day-name" data-day-name>Thứ hai</span><span class="calendar-day-date"><span data-day-date>01/09</span><i class="today-dot" hidden aria-label="Hôm nay"></i></span></div>
+              <div class="calendar-day-head" data-day-head="1" role="columnheader"><span class="calendar-day-name" data-day-name>Thứ ba</span><span class="calendar-day-date"><span data-day-date>02/09</span><i class="today-dot" hidden aria-label="Hôm nay"></i></span></div>
+              <div class="calendar-day-head" data-day-head="2" role="columnheader"><span class="calendar-day-name" data-day-name>Thứ tư</span><span class="calendar-day-date"><span data-day-date>03/09</span><i class="today-dot" hidden aria-label="Hôm nay"></i></span></div>
+              <div class="calendar-day-head" data-day-head="3" role="columnheader"><span class="calendar-day-name" data-day-name>Thứ năm</span><span class="calendar-day-date"><span data-day-date>04/09</span><i class="today-dot" hidden aria-label="Hôm nay"></i></span></div>
+              <div class="calendar-day-head" data-day-head="4" role="columnheader"><span class="calendar-day-name" data-day-name>Thứ sáu</span><span class="calendar-day-date"><span data-day-date>05/09</span><i class="today-dot" hidden aria-label="Hôm nay"></i></span></div>
+              <div class="calendar-day-head" data-day-head="5" role="columnheader"><span class="calendar-day-name" data-day-name>Thứ bảy</span><span class="calendar-day-date"><span data-day-date>06/09</span><i class="today-dot" hidden aria-label="Hôm nay"></i></span></div>
+              <div class="calendar-day-head" data-day-head="6" role="columnheader"><span class="calendar-day-name" data-day-name>Chủ nhật</span><span class="calendar-day-date"><span data-day-date>07/09</span><i class="today-dot" hidden aria-label="Hôm nay"></i></span></div>
+            </div>
+            <div class="calendar-body-grid" role="row">
+              <aside class="calendar-time-axis" aria-hidden="true">
+                <span class="time-label" style="--label-top:0px">08:00</span>
+                <span class="time-label" style="--label-top:110px">10:00</span>
+                <span class="time-label" style="--label-top:220px">12:00</span>
+                <span class="time-label" style="--label-top:330px">14:00</span>
+                <span class="time-label" style="--label-top:440px">16:00</span>
+                <span class="time-label" style="--label-top:550px">18:00</span>
+                <span class="time-label" style="--label-top:660px">20:00</span>
+              </aside>
+              <div class="day-track" data-day-track="0" role="gridcell"></div>
+              <div class="day-track" data-day-track="1" role="gridcell"></div>
+              <div class="day-track" data-day-track="2" role="gridcell"></div>
+              <div class="day-track" data-day-track="3" role="gridcell"></div>
+              <div class="day-track" data-day-track="4" role="gridcell"></div>
+              <div class="day-track" data-day-track="5" role="gridcell"></div>
+              <div class="day-track" data-day-track="6" role="gridcell"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mobile-calendar">
+          <div class="mobile-week-control">
+            <div class="mobile-week-controls">
+              <button class="calendar-control" type="button" data-week-action="prev" aria-label="Tuần trước"><i class="ti ti-chevron-left" aria-hidden="true"></i></button>
+              <button class="calendar-control calendar-today-control" type="button" data-week-action="today">Hôm nay</button>
+              <button class="calendar-control" type="button" data-week-action="next" aria-label="Tuần sau"><i class="ti ti-chevron-right" aria-hidden="true"></i></button>
+            </div>
+          </div>
+          <div class="mobile-day-picker-grid" id="mobileDayPicker">
+            <button class="day-picker is-selected" type="button" data-mobile-day="0" aria-pressed="true"><span class="day-picker-label">T2</span><span class="day-picker-number">01</span></button>
+            <button class="day-picker" type="button" data-mobile-day="1" aria-pressed="false"><span class="day-picker-label">T3</span><span class="day-picker-number">02</span></button>
+            <button class="day-picker" type="button" data-mobile-day="2" aria-pressed="false"><span class="day-picker-label">T4</span><span class="day-picker-number">03</span></button>
+            <button class="day-picker" type="button" data-mobile-day="3" aria-pressed="false"><span class="day-picker-label">T5</span><span class="day-picker-number">04</span></button>
+            <button class="day-picker" type="button" data-mobile-day="4" aria-pressed="false"><span class="day-picker-label">T6</span><span class="day-picker-number">05</span></button>
+            <button class="day-picker" type="button" data-mobile-day="5" aria-pressed="false"><span class="day-picker-label">T7</span><span class="day-picker-number">06</span></button>
+            <button class="day-picker" type="button" data-mobile-day="6" aria-pressed="false"><span class="day-picker-label">CN</span><span class="day-picker-number">07</span></button>
+          </div>
+          <div class="mobile-agenda">
+            <p class="agenda-date" id="mobileAgendaDate">Đang cập nhật ngày…</p>
+            <div class="agenda-list" id="mobileAgendaList"></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="comments-section section-space section-anchor" id="comments">
+      <div class="page-gutter comments-layout">
+        <div>
+          <p class="eyebrow">04 — LỜI NHẮN</p>
+          <h2 class="section-title section-title-small">Để lại một lời chào</h2>
+          <p class="body-copy">Lời nhắn sẽ xuất hiện sau khi được duyệt.</p>
+        </div>
+        <div>
+          <form id="comment-form" class="comment-form">
+            <label>Tên<input name="name" maxlength="80" required autocomplete="name" placeholder="Tên của bạn"></label>
+            <label>Lời nhắn<textarea name="message" maxlength="1000" required rows="4" placeholder="Viết lời nhắn của bạn"></textarea></label>
+            <button class="primary-action" type="submit">Gửi lời nhắn <i class="ti ti-send" aria-hidden="true"></i></button>
+            <p id="comment-form-message" class="comment-form-message" role="status"></p>
+          </form>
+          <div id="comment-list" class="comment-list" aria-live="polite"></div>
+        </div>
       </div>
     </section>
 
     <footer class="site-footer">
-      <a href="/admin.html">Quản trị</a>
+      <div class="page-gutter footer-inner">
+        <span class="footer-version">MA / 2026</span>
+        <a class="header-link" href="/admin.html">Quản trị</a>
+      </div>
     </footer>
-  </template>
-
-  <script src="/js/main.js"></script>
+  </main>
 </body>
 </html>

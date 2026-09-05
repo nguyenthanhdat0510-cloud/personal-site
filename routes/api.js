@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const Profile = require('../models/Profile');
+const Comment = require('../models/Comment');
 
 // Middleware kiểm tra token admin (đọc từ header "x-admin-token")
 function requireAdmin(req, res, next) {
   const token = req.header('x-admin-token');
   if (!token || token !== process.env.ADMIN_TOKEN) {
-    return res.status(401).json({ error: 'Sai hoặc thiếu admin token' });
+    return res.status(401).json({ error: 'Sai hoặc thiếu mật khẩu quản trị' });
   }
   next();
 }
@@ -77,7 +78,61 @@ router.post('/login', (req, res) => {
   if (token && token === process.env.ADMIN_TOKEN) {
     return res.json({ ok: true });
   }
-  res.status(401).json({ ok: false, error: 'Token không đúng' });
+  res.status(401).json({ ok: false, error: 'Mật khẩu không đúng' });
+});
+
+// GET /api/comments - chỉ hiển thị những lời nhắn đã được admin duyệt
+router.get('/comments', async (req, res) => {
+  try {
+    const comments = await Comment.find({ approved: true }).sort({ createdAt: -1 }).lean();
+    res.json(comments);
+  } catch (err) {
+    res.status(500).json({ error: 'Không thể tải lời nhắn' });
+  }
+});
+
+// POST /api/comments - lời nhắn mới luôn chờ duyệt
+router.post('/comments', async (req, res) => {
+  try {
+    const name = String(req.body.name || '').trim();
+    const message = String(req.body.message || '').trim();
+    if (!name || !message) return res.status(400).json({ error: 'Vui lòng nhập tên và lời nhắn' });
+    if (name.length > 80 || message.length > 1000) return res.status(400).json({ error: 'Lời nhắn vượt quá độ dài cho phép' });
+    await Comment.create({ name, message });
+    res.status(201).json({ ok: true, message: 'Lời nhắn đã được gửi và đang chờ duyệt.' });
+  } catch (err) {
+    res.status(400).json({ error: 'Không thể gửi lời nhắn' });
+  }
+});
+
+// Các API kiểm duyệt chỉ dành cho admin.
+router.get('/comments/pending', requireAdmin, async (req, res) => {
+  try {
+    const comments = await Comment.find({ approved: false }).sort({ createdAt: -1 }).lean();
+    res.json(comments);
+  } catch (err) {
+    res.status(500).json({ error: 'Không thể tải lời nhắn chờ duyệt' });
+  }
+});
+
+router.patch('/comments/:id/approve', requireAdmin, async (req, res) => {
+  try {
+    const comment = await Comment.findByIdAndUpdate(req.params.id, { approved: true }, { new: true });
+    if (!comment) return res.status(404).json({ error: 'Không tìm thấy lời nhắn' });
+    res.json(comment);
+  } catch (err) {
+    res.status(400).json({ error: 'Không thể duyệt lời nhắn' });
+  }
+});
+
+router.delete('/comments/:id', requireAdmin, async (req, res) => {
+  try {
+    const comment = await Comment.findByIdAndDelete(req.params.id);
+    if (!comment) return res.status(404).json({ error: 'Không tìm thấy lời nhắn' });
+    res.json({ ok: true });
+  } catch (err) {
+    res.status(400).json({ error: 'Không thể xoá lời nhắn' });
+  }
 });
 
 module.exports = router;
