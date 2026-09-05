@@ -44,6 +44,22 @@
   font-family: var(--font-ui);
 }
 
+.page-loading {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 12px;
+  background: var(--paper);
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.page-loading p { margin: 0; }
+.page-loading .error-action { color: var(--blue); }
+
 .campus-page.theme-dark {
   --paper: #0d1522;
   --wash: #14243b;

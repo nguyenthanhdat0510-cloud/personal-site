@@ -12,15 +12,7 @@
   const TRACK_HOUR_HEIGHT = 55;
   const TIMELINE_HEIGHT = (SCHEDULE_END_HOUR - SCHEDULE_START_HOUR) * TRACK_HOUR_HEIGHT;
 
-  let lessonsByDay = [
-    [{ id: 'cs204', code: 'CS204', title: 'Lập trình Web', start: '09:00', end: '11:00', room: 'A3.204', tone: 'tone-blue' }],
-    [{ id: 'ux201', code: 'UX201', title: 'Thiết kế trải nghiệm', start: '13:30', end: '15:00', room: 'B2.106', tone: 'tone-lilac' }],
-    [{ id: 'ds110', code: 'DS110', title: 'Cơ sở dữ liệu', start: '10:00', end: '12:00', room: 'C1.305', tone: 'tone-sky' }],
-    [{ id: 'ma102', code: 'MA102', title: 'Toán rời rạc', start: '08:30', end: '10:00', room: 'A1.110', tone: 'tone-mint' }],
-    [{ id: 'en205', code: 'EN205', title: 'Tiếng Anh chuyên ngành', start: '15:00', end: '17:00', room: 'D4.201', tone: 'tone-indigo' }],
-    [{ id: 'it304', code: 'IT304', title: 'Phát triển ứng dụng', start: '09:00', end: '11:30', room: 'Lab 02', tone: 'tone-blue' }],
-    []
-  ];
+  let lessonsByDay = Array.from({ length: 7 }, () => []);
 
   const $ = (selector, scope = document) => scope.querySelector(selector);
   const $$ = (selector, scope = document) => Array.from(scope.querySelectorAll(selector));
@@ -157,17 +149,30 @@
       ticket.setAttribute('aria-label', `Xem ${nextLesson.title}`);
     }
     renderCalendar();
+    page.classList.remove('is-loading');
+    $('#pageLoading').hidden = true;
   }
 
   async function loadProfile() {
+    const loading = $('#pageLoading');
+    const loadingMessage = $('#pageLoadingMessage');
+    const retry = $('#profileRetry');
+    page.classList.add('is-loading');
+    loading.hidden = false;
+    loadingMessage.textContent = 'Đang tải hồ sơ…';
+    retry.hidden = true;
     try {
       const response = await fetch('/api/profile');
       if (!response.ok) throw new Error('Không thể tải hồ sơ');
       renderProfile(await response.json());
     } catch (error) {
       console.error(error);
+      loadingMessage.textContent = 'Không thể tải hồ sơ.';
+      retry.hidden = false;
     }
   }
+
+  $('#profileRetry')?.addEventListener('click', loadProfile);
 
   function formatCommentDate(value) {
     return new Intl.DateTimeFormat('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' }).format(new Date(value));

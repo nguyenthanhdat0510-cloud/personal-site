@@ -13,7 +13,12 @@
   <script defer src="/js/main.js"></script>
 </head>
 <body>
-  <main class="campus-page" id="campusPage">
+  <main class="campus-page is-loading" id="campusPage">
+    <div class="page-loading" id="pageLoading" role="status">
+      <i class="ti ti-loader-2 loading-icon" aria-hidden="true"></i>
+      <p id="pageLoadingMessage">Đang tải hồ sơ…</p>
+      <button id="profileRetry" class="error-action" type="button" hidden>Thử lại</button>
+    </div>
     <header class="site-header">
       <div class="page-gutter header-inner">
         <a class="brand-mark" href="#home" aria-label="Về đầu trang">
@@ -52,8 +57,8 @@
       <div class="page-gutter hero-grid">
         <div class="hero-portrait">
           <div class="avatar-frame">
-            <div class="avatar-fallback" id="avatarFallback" aria-hidden="true" hidden>MA</div>
-            <img id="avatarImage" src="https://i.pravatar.cc/900?img=47" alt="Ảnh đại diện Nguyễn Minh An" loading="lazy" decoding="async">
+            <div class="avatar-fallback" id="avatarFallback" aria-hidden="true" hidden></div>
+            <img id="avatarImage" alt="Ảnh đại diện" loading="lazy" decoding="async" hidden>
             <span class="tech-corner tech-corner-tl" aria-hidden="true"></span>
             <span class="tech-corner tech-corner-tr" aria-hidden="true"></span>
             <span class="tech-corner tech-corner-bl" aria-hidden="true"></span>
